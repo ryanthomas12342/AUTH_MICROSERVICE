@@ -4,9 +4,12 @@ const express = require("express");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  return res.send("hello");
-});
+const authRoutes = require("./routes/index");
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/v1/auth", authRoutes);
 
 app.listen(config.PORT, () => {
   console.log(`App is running on port ${config.PORT}`);
